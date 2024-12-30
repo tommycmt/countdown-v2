@@ -29,6 +29,19 @@
     </video>
   </div>
   <script>
+    function iOS() {
+      return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
+
     // a function to display a box with the message when entering the page, the box will ask user to click to play the video
 
     function displayMessage(video) {
@@ -94,6 +107,9 @@
         video1.style.display = 'none';
         video2.style.display = 'block';
         video2.playsinline = true;
+        if (iOS()) {
+          video2.muted = true;
+        }
         video2.play();
         video1.pause();
         played = true;
@@ -104,6 +120,7 @@
     }
 
     setInterval(checkTime, 500);
+    
     
 
   </script>
