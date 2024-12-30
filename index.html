@@ -30,7 +30,8 @@
   </div>
   <script>
     // a function to display a box with the message when entering the page, the box will ask user to click to play the video
-    function displayMessage() {
+
+    function displayMessage(video) {
       var message = document.createElement('div');
       message.style.position = 'absolute';
       message.style.top = '50%';
@@ -43,7 +44,7 @@
       message.style.cursor = 'pointer';
       message.innerHTML = 'Click to play the video';
       message.onclick = function() {
-        var video = document.getElementById('video1');
+
         video.play();
         message.style.display = 'none';
       }
@@ -53,7 +54,7 @@
     var video1 = document.getElementById('video1');
     var video2 = document.getElementById('video2');
 
-    displayMessage()
+    
 
     // Write a function to keep track the current date and time, if the current time reach year 2025, change the video source to 2025.mp4 and play the video
     var played = false;
@@ -62,7 +63,7 @@
     var year2025;
 
     // user can set the target date and time by using query string in the url, the format of the query string is targetDate=YYYY-MM-DDTHH:MM:SS
-    // for example: http://localhost:3000/?targetdate=2025-01-01T00:00:00
+    // for example: http://localhost:3000/?targetDate=2025-01-01T00:00:00
 
     var urlParams = new URLSearchParams(window.location.search);
     var targetDate = urlParams.get('targetdate');
@@ -71,6 +72,19 @@
       year2025 = targetTime;
     } else {
       year2025 = new Date(2024, 11, 31, 23,59,59).getTime();
+    }
+
+    var video;
+    if (new Date().getTime() >= year2025) {
+          video = document.getElementById('video2');
+          video1.style.display = 'none';
+          video2.style.display = 'block';
+          video2.muted = true;
+          video2.autoplay = true;
+          video2.play();
+    } else {
+      video = document.getElementById('video1');
+      displayMessage(video);
     }
 
     function checkTime() {
@@ -86,7 +100,9 @@
       }
 
     }
+
     setInterval(checkTime, 500);
+    
 
   </script>
 
