@@ -62,10 +62,10 @@
     var year2025;
 
     // user can set the target date and time by using query string in the url, the format of the query string is targetDate=YYYY-MM-DDTHH:MM:SS
-    // for example: http://localhost:3000/?targetDate=2025-01-01T00:00:00
+    // for example: http://localhost:3000/?targetdate=2025-01-01T00:00:00
 
     var urlParams = new URLSearchParams(window.location.search);
-    var targetDate = urlParams.get('targetDate');
+    var targetDate = urlParams.get('targetdate');
     if (targetDate) {
       var targetTime = new Date(targetDate).getTime();
       year2025 = targetTime;
