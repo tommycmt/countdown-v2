@@ -93,8 +93,8 @@
       if (currentTime >= year2025 && !played) {
         video1.style.display = 'none';
         video2.style.display = 'block';
-        video2.play();
         video2.playsinline = true;
+        video2.play();
         video1.pause();
         played = true;
       } else if (played) {
